@@ -1,4 +1,5 @@
 ;; calculate x^n
+;; tail recursive
 (define (power x n)
   (define (iter n result)
     (if (= n 0)
@@ -6,10 +7,11 @@
       (iter (- n 1) (* result x))))
   (iter n 1))
 
-(define (power2 x n)
+;; recursive power
+(define (power_recursive x n)
   (if (= n 0)
       1
-      (* x (power2 x (- n 1)))))
+      (* x (power_recursive x (- n 1)))))
 
 
 ;; find the root of
@@ -21,7 +23,7 @@
     ((if (< x 0) - +) x))
   
   ;; improve the guess with newton's method
-  ;; applied to exuations in the form of
+  ;; applied to equations in the form of
   ;; x^n - y = 0
   (define (improve guess)
     (/ (+ (* guess (- n 1)) (/ y (power guess (- n 1)))) n))
